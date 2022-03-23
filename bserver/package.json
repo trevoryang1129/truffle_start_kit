@@ -1,0 +1,36 @@
+{
+  "name": "bserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "create": "truffle unbox metacoin",
+    "type_gen": "typechain --target truffle-v5 --out-dir ./typechain ./build/**/*.json",
+    "type_gen2": "rimraf ../bclient/src/typechain && typechain --target web3-v1 --out-dir ../bclient/src/typechain ./build/**/*.json",
+    "build": "truffle compile && npm run type_gen && npm run type_gen2 && npm run build2",
+    "deploy": "tsc -p ./tsconfig.migrate.json --outDir ./migrations && truffle migrate  --network development --reset && npm run build2",
+    "test": "truffle test",
+    "build2": "rimraf ../bclient/src/artifacts && cp -R ./build ../bclient/src/artifacts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typechain/truffle-v5": "^7.0.0",
+    "@typechain/web3-v1": "^5.0.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^17.0.8",
+    "rimraf": "^3.0.2",
+    "truffle": "^5.4.29",
+    "ts-node": "^10.4.0",
+    "typechain": "^7.0.0",
+    "typescript": "^4.5.4",
+    "@remix-project/remixd": "^0.5.5"
+  },
+  "dependencies": {
+    "bn.js": "^5.2.0"
+  }
+}
